@@ -9,20 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import in.sp.main.entities.student;
 import in.sp.main.services.studentService;
-
 @Controller
 public class controllers {
-	
 	@Autowired
 	private studentService studentservice;
-	
 	@GetMapping("/regPage")
 	public String openregPag(Model model) {
 		model.addAttribute("std", new student());
 		return "register";
 	}
-	
-	
 	@PostMapping("/regForm")
 	public String submitregform(@ModelAttribute("std") student std ,Model model) {
 		boolean status = studentservice.registerStudent(std);
@@ -31,11 +26,8 @@ public class controllers {
 		}else {
 			model.addAttribute("errormsg","user not registered due to some error");
 		}
-		return"register";
-		
+		return"register";	
 	}
-	
-	
 	@GetMapping("/loginPage")
 	public String openLoginPage(Model model) {
 		model.addAttribute("std", new student());
@@ -47,11 +39,9 @@ public class controllers {
 		
 		if(stu != null) {
 			return"profile";
-			
 		}else {
 			model.addAttribute("errormsg", "Email or password didn't matched");
 			return "register";
 		}
-		
 	}
 }
